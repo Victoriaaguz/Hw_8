@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+#include<bits/stdc++.h>
+using namespace std;
+//Made with help of https://www.geeksforgeeks.org/c-program-hashing-chaining/
+class myhash
+{
+int mybucket;
+
+    list<int> *table;
+public:
+    myhash(int V);
+    void insertItem(int x);
+    int hashFunction(int x) {
+        return (x % mybucket);
+    }
+
+    void displayHash();
+};
+
+myhash::myhash(int b)
+{
+    this->mybucket = b;
+    table = new list<int>[mybucket];
+}
+
+void myhash::insertItem(int key)
+{
+    int index = hashFunction(key);
+    table[index].push_back(key);
+}
+
+void myhash::displayHash() {
+for (int i = 0; i < mybucket; i++) {
+    cout << i;
+    for (auto x : table[i])
+    cout << " --> " << x;
+    cout << endl;
+}
+}
+
+int main()
+{
+
+int a[] = {2, 8, 19, 20, 31, 35, 41, 49, 50, 52, 58};
+int n = sizeof(a)/sizeof(a[0]);
+
+myhash h(7); 
+for (int i = 0; i < n; i++)
+    h.insertItem(a[i]);
+h.displayHash();
+
+return 0;
+} 
